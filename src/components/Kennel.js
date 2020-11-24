@@ -6,6 +6,8 @@ import { Customer } from "./customer/Customer"
 import "./customer/Customer.css"
 import { Employee } from "./employee/Employee"
 import "./employee/Employee.css"
+import { Location } from "./location/Location"
+import "./location/Location.css"
 
 export const Kennel = () => (
     <>
@@ -29,6 +31,12 @@ export const Kennel = () => (
             <Employee />
             <Employee />
             <Employee />
+        </article>
+        
+        <h2>Locations</h2>
+        <article className="locations">
+            <Location />
+            <Location />
         </article>
 
         <h2>Customers</h2>
