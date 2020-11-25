@@ -4,7 +4,9 @@ import { Animal } from "./animal/Animal"
 import "./animal/Animal.css"
 import { Customer } from "./customer/Customer"
 import "./customer/Customer.css"
-import { Employee } from "./employee/Employee"
+// import { Employee } from "./employee/Employee"
+import { EmployeeList } from "./employee/EmployeeList"
+import { EmployeeProvider } from "./employee/EmployeeProvider"
 import "./employee/Employee.css"
 // import { Location } from "./location/Location"
 import { LocationList } from "./location/LocationList"
@@ -29,11 +31,9 @@ export const Kennel = () => (
         </article>
         
         <h2>Employees</h2>
-        <article className="employees">
-            <Employee />
-            <Employee />
-            <Employee />
-        </article>
+        <EmployeeProvider>
+            <EmployeeList />
+        </EmployeeProvider>
         
         <h2>Locations</h2>
         <LocationProvider>
