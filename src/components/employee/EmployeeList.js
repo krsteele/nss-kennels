@@ -1,11 +1,13 @@
 import React, { useContext, useEffect } from "react"
 import { EmployeeContext } from "./EmployeeProvider"
+import { LocationContext } from "../location/LocationProvider"
 import { Employee } from "./Employee"
 import "./Employee.css"
 
 export const EmployeeList = () => {
     // This state changes when `getEmployees()` is invoked below
     const { employees, getEmployees } = useContext(EmployeeContext)
+    const { locations, getLocations } = useContext(LocationContext)
 
     /*
         What's the effect this is reponding to? Component was
@@ -14,7 +16,8 @@ export const EmployeeList = () => {
     */
     useEffect(() => {
         console.log("EmployeeList: Initial render before data")
-        getEmployees()
+        getLocations()
+        .then(getEmployees)
     }, [])
 
     /*
@@ -29,7 +32,12 @@ export const EmployeeList = () => {
     return (
         <div className="employees">
         {
-            employees.map(em => <Employee key={em.id} employee={em} />)
+            employees.map(em => {
+                const clinic = locations.find(l => l.id === em.locationId)
+
+            return <Employee key={em.id} 
+                        location={clinic}
+                        employee={em} />})
         }
         </div>
     )
