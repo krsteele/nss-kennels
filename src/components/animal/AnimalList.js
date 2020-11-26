@@ -1,11 +1,15 @@
 import React, { useContext, useEffect } from "react"
 import { AnimalContext } from "./AnimalProvider"
+import { LocationContext } from "../location/LocationProvider"
+import { CustomerContext } from "../customer/CustomerProvider"
 import { Animal } from "./Animal"
 import "./Animal.css"
 
 export const AnimalList = () => {
     // This state changes when `getAnimals()` is invoked below
     const { animals, getAnimals } = useContext(AnimalContext)
+    const { locations, getLocations } = useContext(LocationContext)
+    const { customers, getCustomers } = useContext(CustomerContext)
 
     /*
         What's the effect this is reponding to? Component was
@@ -14,7 +18,9 @@ export const AnimalList = () => {
     */
     useEffect(() => {
         console.log("AnimalList: Initial render before data")
-        getAnimals()
+        getLocations()
+        .then(getCustomers)
+        .then(getAnimals)
     }, [])
 
     /*
@@ -29,7 +35,14 @@ export const AnimalList = () => {
     return (
         <div className="animals">
         {
-            animals.map(em => <Animal key={em.id} animal={em} />)
+            animals.map(animal => {
+                const owner = customers.find(c => c.id === animal.customerId)
+                const clinic = locations.find(l => l.id === animal.locationId)
+                
+                return <Animal key={animal.id} 
+                            location={clinic}
+                            customer={owner}
+                            animal={animal} />})
         }
         </div>
     )
