@@ -1,4 +1,7 @@
 import React from "react"
+import { Route } from "react-router-dom"
+import { NavBar } from "./nav/NavBar"
+import { ApplicationViews } from "./ApplicationViews"
 import "./Kennel.css"
 // import { Animal } from "./animal/Animal"
 import { AnimalProvider } from "./animal/AnimalProvider"
@@ -27,24 +30,7 @@ export const Kennel = () => (
             <div>500 Puppy Way</div>
         </address>
 
-        <h2>Animals</h2>
-        <AnimalProvider>
-            <AnimalList />
-        </AnimalProvider>
-        
-        <h2>Employees</h2>
-        <EmployeeProvider>
-            <EmployeeList />
-        </EmployeeProvider>
-        
-        <h2>Locations</h2>
-        <LocationProvider>
-            <LocationList />
-        </LocationProvider>
-
-        <h2>Customers</h2>
-        <CustomerProvider>
-            <CustomerList />
-        </CustomerProvider>
+        <NavBar />
+        <ApplicationViews />
     </>
 )
