@@ -40,9 +40,13 @@ export const ApplicationViews = (props) => {
             <EmployeeProvider>
                 <LocationProvider>
                     {/* Render the employee list when http://localhost:3000/employees */}
-                    <Route path="/employees">
+                    <Route exact path="/employees" render={
+                        props => <EmployeeList {...props} />
+                    } />
+                    <Route exact path="/employees/create" render={
+                        props => <EmployeeForm {...props} />
+                    } />
                         <EmployeeList />
-                    </Route>
                 </LocationProvider>
             </EmployeeProvider>
         </>
