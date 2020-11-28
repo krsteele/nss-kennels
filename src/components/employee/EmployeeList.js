@@ -4,7 +4,7 @@ import { LocationContext } from "../location/LocationProvider"
 import { Employee } from "./Employee"
 import "./Employee.css"
 
-export const EmployeeList = () => {
+export const EmployeeList = (props) => {
     // This state changes when `getEmployees()` is invoked below
     const { employees, getEmployees } = useContext(EmployeeContext)
     const { locations, getLocations } = useContext(LocationContext)
@@ -31,14 +31,20 @@ export const EmployeeList = () => {
 
     return (
         <div className="employees">
-        {
-            employees.map(em => {
-                const clinic = locations.find(l => l.id === em.locationId)
+            <h1>Employees</h1>
+            <button onClick={() => props.history.push("/employees/create")}>
+                Add Employee
+            </button>
+            <article className="employeeList">
+            {
+                employees.map(em => {
+                    const clinic = locations.find(l => l.id === em.locationId)
 
-            return <Employee key={em.id} 
-                        location={clinic}
-                        employee={em} />})
-        }
+                return <Employee key={em.id} 
+                            location={clinic}
+                            employee={em} />})
+            }
+            </article>
         </div>
     )
 }
