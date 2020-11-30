@@ -2,7 +2,7 @@ import React, { useContext, useRef, useEffect } from "react"
 import { AnimalContext } from "./AnimalProvider"
 import { CustomerContext } from "../customer/CustomerProvider"
 import { LocationContext } from "../location/LocationProvider"
-import "./Employee.css"
+import "./Animal.css"
 
 export const AnimalForm = (props) => {
     const { addAnimal } = useContext(AnimalContext)
@@ -12,6 +12,7 @@ export const AnimalForm = (props) => {
     const name = useRef(null)
     const location = useRef(null)
     const owner = useRef(null)
+    const breed = useRef(null)
 
     /* Get customer state and location state on initialization. */
     useEffect(() => {
@@ -25,16 +26,18 @@ export const AnimalForm = (props) => {
         `.current.value` now in React.
         */
        const locationId = parseInt(location.current.value)
-       const ownerId = parseInt(owner.current.value)
+       const customerId = parseInt(owner.current.value)
        const animalName = name.current.value
+       const animalBreed = breed.current.value
    
-       if (locationId === 0 || ownerId === 0 || animalName === "") {
+       if (locationId === 0 || customerId === 0 || animalName === "") {
          window.alert("Please select a location and an owner and provide a name")
        } else {
          addAnimal({
            name: animalName,
+           animalBreed,
            locationId,
-           ownerId
+           customerId
          })
            .then(() => props.history.push("/animals"))
        }
@@ -46,6 +49,12 @@ export const AnimalForm = (props) => {
                 <div className="form-group">
                     <label htmlFor="animalName">Animal name: </label>
                     <input type="text" id="animalName" ref={name} required autoFocus className="form-control" placeholder="Animal name" />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="animalBreed">Animal breed: </label>
+                    <input type="text" id="animalBreed" ref={breed} required autoFocus className="form-control" placeholder="Animal breed" />
                 </div>
             </fieldset>
             <fieldset>
