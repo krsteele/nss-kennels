@@ -20,6 +20,9 @@ export const ApplicationViews = (props) => {
                 <Route exact path="/">
                     <LocationList />
                 </Route>
+                <Route path="/locations/:locationId(\d+)" render={
+                    props => <LocationDetail {...props} />
+                } />
             </LocationProvider>
 
             <AnimalProvider>
