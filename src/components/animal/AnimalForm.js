@@ -7,16 +7,16 @@ import "./Animal.css"
 export const AnimalForm = (props) => {
     const { addAnimal } = useContext(AnimalContext)
     const { locations, getLocations } = useContext(LocationContext)
-    const { customers, getCustomers } = useContext(CustomerContext)
+    // const { customers, getCustomers } = useContext(CustomerContext)
 
     const name = useRef(null)
     const location = useRef(null)
-    const owner = useRef(null)
+    // const owner = useRef(null)
     const breed = useRef(null)
 
     /* Get customer state and location state on initialization. */
     useEffect(() => {
-        getCustomers().then(getLocations)
+        getLocations()
     }, [])
     
     const constructNewAnimal = () => {
@@ -26,18 +26,18 @@ export const AnimalForm = (props) => {
         `.current.value` now in React.
         */
        const locationId = parseInt(location.current.value)
-       const customerId = parseInt(owner.current.value)
+    //    const customerId = parseInt(owner.current.value)
        const animalName = name.current.value
        const animalBreed = breed.current.value
    
-       if (locationId === 0 || customerId === 0 || animalName === "") {
+       if (locationId === 0 || animalName === "") {
          window.alert("Please select a location and an owner and provide a name")
        } else {
          addAnimal({
            name: animalName,
            animalBreed,
            locationId,
-           customerId
+           customerId: parseInt(localStorage.getItem("kennel_customer"))
          })
            .then(() => props.history.push("/animals"))
        }
@@ -63,19 +63,6 @@ export const AnimalForm = (props) => {
                     <select defaultValue="" name="location" ref={location} id="animalLocation" className="form-control" >
                         <option value="0">Select a location</option>
                         {locations.map(e => (
-                            <option key={e.id} value={e.id}>
-                                {e.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="customer">Assign to customer: </label>
-                    <select defaultValue="" name="customer" ref={owner} id="animalCustomer" className="form-control" >
-                        <option value="0">Select a customer</option>
-                        {customers.map(e => (
                             <option key={e.id} value={e.id}>
                                 {e.name}
                             </option>
