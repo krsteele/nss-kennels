@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from "react"
 import { EmployeeContext } from "./EmployeeProvider"
-import { LocationContext } from "../location/LocationProvider"
-import { Employee } from "./Employee"
+// import { LocationContext } from "../location/LocationProvider"
+// import { Employee } from "./Employee"
+import { Link } from "react-router-dom"
 import "./Employee.css"
 
 export const EmployeeList = (props) => {
     // This state changes when `getEmployees()` is invoked below
     const { employees, getEmployees } = useContext(EmployeeContext)
-    const { locations, getLocations } = useContext(LocationContext)
+    // const { locations, getLocations } = useContext(LocationContext)
 
     /*
         What's the effect this is reponding to? Component was
@@ -16,8 +17,7 @@ export const EmployeeList = (props) => {
     */
     useEffect(() => {
         console.log("EmployeeList: Initial render before data")
-        getLocations()
-        .then(getEmployees)
+        getEmployees()
     }, [])
 
     /*
@@ -36,14 +36,13 @@ export const EmployeeList = (props) => {
                 Add Employee
             </button>
             <article className="employeeList">
-            {
-                employees.map(em => {
-                    const clinic = locations.find(l => l.id === em.locationId)
-
-                return <Employee key={em.id} 
-                            location={clinic}
-                            employee={em} />})
-            }
+                {
+                    employees.map(employee => {
+                        return <Link key={employee.id} to={`/employees/${employee.id}`}>
+                            <h3>{employee.name}</h3>
+                        </Link>
+                    })
+                }
             </article>
         </div>
     )
