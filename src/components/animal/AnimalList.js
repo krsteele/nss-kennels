@@ -29,7 +29,7 @@ export const AnimalList = ({history}) => {
     return (
         <>
             <h1>Animals</h1>
-            <button onClick={() => props.history.push("/animals/create")}>
+            <button onClick={() => history.push("/animals/create")}>
                 Make Appointment
             </button>
             <div className="animals">
