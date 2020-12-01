@@ -18,13 +18,6 @@ import { TreatList } from "./treats/TreatList"
 export const ApplicationViews = (props) => {
     return (
         <>
-
-                <Route exact path="/treats/" render={
-                            props => <TreatList {...props} name="Kristen"/>
-                        } />
-                <Route path="/treats/:treatId(\d+)" render={
-                            props => <TreatList {...props} name="Kristen"/>
-                        } />
             <LocationProvider>
                 <AnimalProvider>
                     <EmployeeProvider>
