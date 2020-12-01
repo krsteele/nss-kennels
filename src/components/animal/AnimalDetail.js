@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { AnimalContext } from "./AnimalProvider"
 import "./Animal.css"
 
-export const AnimalDetails = (props) => {
+export const AnimalDetail = (props) => {
     const { releaseAnimal, getAnimalById } =useContext(AnimalContext)
 
     const [animal, setAnimal] = useState({location: {}, customer: {}})
