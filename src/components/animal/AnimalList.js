@@ -5,7 +5,9 @@ import "./Animal.css"
 
 export const AnimalList = ({history}) => {
     // This state changes when `getAnimals()` is invoked below
-    const { animals, getAnimals } = useContext(AnimalContext)
+    const { animals, searchTerms, getAnimals } = useContext(AnimalContext)
+    // since we are no longer always going to be displaying all animals
+    const [filteredAnimals, setFiltered] = useState([])
 
     /*
         What's the effect this is reponding to? Component was
@@ -17,14 +19,24 @@ export const AnimalList = ({history}) => {
         getAnimals()
     }, [])
 
-    /*
-        This effect is solely for learning purposes. The effect
-        it is responding to is that the animal state changed.
+    /* 
+        This effect hook function will run when the following two state changes happen:
+            1. The animal state changes. First when it is created, then once you get the animals from the API
+            2. When the search terms change, which happens when the user types something in the AnimalSearch component
     */
     useEffect(() => {
-        console.log("AnimalList: Animal state changed")
-        console.log(animals)
-    }, [animals])
+        if (searchTerms !== "") {
+            console.log(searchTerms)
+            const subset = animals.filter(animal => animal.name.toLowerCase().includes(searchTerms))
+            setFiltered(subset)
+        } else {
+            setFiltered(animals)
+        }
+    }, [searchTerms, animals])
+
+    useEffect(() => {
+        console.log("filtered animals:", filteredAnimals)
+    }, [filteredAnimals])
 
     return (
         <>
@@ -34,7 +46,7 @@ export const AnimalList = ({history}) => {
             </button>
             <div className="animals">
             {
-                animals.map(animal => {
+                filteredAnimals.map(animal => {
                     return <Animal key={animal.id} animal={animal} />})
             }
             </div>
