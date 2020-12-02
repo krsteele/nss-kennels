@@ -26,12 +26,17 @@ export const AnimalList = ({history}) => {
     */
     useEffect(() => {
         if (searchTerms !== "") {
+            console.log(searchTerms)
             const subset = animals.filter(animal => animal.name.toLowerCase().includes(searchTerms))
             setFiltered(subset)
         } else {
             setFiltered(animals)
         }
     }, [searchTerms, animals])
+
+    useEffect(() => {
+        console.log("filtered animals:", filteredAnimals)
+    }, [filteredAnimals])
 
     return (
         <>
