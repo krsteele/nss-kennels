@@ -19,7 +19,7 @@ export const LocationList = () => {
         then gets the data, then re-renders.
     */
     useEffect(() => {
-        console.log("LocationList: Initial render before data")
+        // console.log("LocationList: Initial render before data")
         getLocations().then(getEmployees).then(getAnimals)
     }, [])
 
@@ -28,8 +28,8 @@ export const LocationList = () => {
         it is responding to is that the location state changed.
     */
     useEffect(() => {
-        console.log("LocationList: Location state changed")
-        console.log(locations)
+        // console.log("LocationList: Location state changed")
+        // console.log(locations)
     }, [locations])
 
     return (

@@ -16,7 +16,7 @@ export const EmployeeList = (props) => {
         then gets the data, then re-renders.
     */
     useEffect(() => {
-        console.log("EmployeeList: Initial render before data")
+        // console.log("EmployeeList: Initial render before data")
         getEmployees()
     }, [])
 
@@ -25,8 +25,8 @@ export const EmployeeList = (props) => {
         it is responding to is that the employee state changed.
     */
     useEffect(() => {
-        console.log("EmployeeList: Employee state changed")
-        console.log(employees)
+        // console.log("EmployeeList: Employee state changed")
+        // console.log(employees)
     }, [employees])
 
     return (
